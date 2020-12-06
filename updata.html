@@ -1,0 +1,34 @@
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <title>
+            test update
+        </title>
+    </head>
+    <body>
+        <button onclick="updateTraining()">update</button>
+        <div id="output"></div>
+    </body>
+    <script>
+        function updateTraining(){
+            var training = {"name":"Joe Bloggs","trainingrecord":"Safe Pass","yearcompleted":2019,"expirryyear":2022}
+            console.log(JSON.stringify(training));
+            $.ajax({
+                "url": "http://127.0.0.1:5000/training/"+encodeURI(training.trainingrecord),
+                "method":"PUT",
+                "data":JSON.stringify(training),
+                "dataType": "JSON",
+                contentType: "application/json; charset=utf-8",
+                "success":function(result){
+                    console.log(result);
+                    document.getElementById("output").innerText = JSON.stringify(result);    
+                },
+                "error":function(xhr,status,error){
+                    console.log("error: "+status+" msg:"+error);
+                }
+            });
+
+        }
+       
+    </script>
+</html>
