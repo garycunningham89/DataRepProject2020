@@ -8,9 +8,9 @@ class TrainingDAO:
             host = 'localhost',
             user = 'root',
             password= '',
-            database ='datarepproject'
+            database = 'datarepproject'
             )
-        #print(connection made)
+        #print('connection made')
     def create(self, record):
         cursor = self.db.cursor()
         sql = "Insert into training (userid, name, trainingrecord, yearcompleted, expiryyear) values (%s,%s,%s,%s,%s)"
