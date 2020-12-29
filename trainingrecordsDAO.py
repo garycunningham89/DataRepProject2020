@@ -1,4 +1,5 @@
 import mysql.connector
+from mysql.connector import cursor
 
 class TrainingDAO:
     db = ""
@@ -12,13 +13,13 @@ class TrainingDAO:
         #print(connection made)
     def create(self, record):
         cursor = self.db.cursor()
-        sql = "Insert into training (userid, name, trainingrecord, yearcompleted, expiryyear) values (%s,%s,%s,%s, %s)"
+        sql = "Insert into training (userid, name, trainingrecord, yearcompleted, expiryyear) values (%s,%s,%s,%s,%s)"
         values = [
             record['userid'],
             record['name'],
             record['trainingrecord'],
             record['yearcompleted'],
-            record['expiryyear'],
+            record['expiryyear']
             ]
         cursor.execute(sql, values)
         self.db.commit()
@@ -29,7 +30,7 @@ class TrainingDAO:
         sql = 'select * from training'
         cursor.execute(sql)
         results = cursor.fetchall()
-        returnArray =  []
+        returnArray = []
         #print(results)
         for result in results:
             resultAsDict = self.convertToDict(result)
@@ -40,12 +41,13 @@ class TrainingDAO:
     def findById(self, userid):
         cursor = self.db.cursor()
         sql = 'select * from training where userid = %s'
-        values = [userid]
+        values = [ userid ]
+        values = [ userid ]
         cursor.execute(sql,values)
         result = cursor.fetchone()
         return self.convertToDict(result)
     
-    def update(self,record):
+    def update(self, record):
         cursor = self.db.cursor()
         sql = "update training set name = %s, trainingrecord = %s, yearcompleted = %s, expiryyear = %s where userid = %s" 
         values = [
@@ -53,7 +55,7 @@ class TrainingDAO:
             record['name'],
             record['trainingrecord'],
             record['yearcompleted'],
-            record['expiryyear'],
+            record['expiryyear']
         ]
         cursor.execute(sql, values)
         self.db.commit()
@@ -69,10 +71,9 @@ class TrainingDAO:
     def convertToDict(self, result):
         colnames = ['userid','name','trainingrecord','yearcompleted','expiryyear']
         record = {}
-        
         if result:
-            for i , colname in enumerate(colnames):
+            for i , colName in enumerate(colnames):
                 value = result[i]
-                record[colname] = value
+                record[colName] = value
             return record
 trainingDAO = TrainingDAO()

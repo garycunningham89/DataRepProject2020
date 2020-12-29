@@ -1,0 +1,236 @@
+<html>
+    <head>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+            
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+                integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    </head>
+    <body>
+        <div id="create-update" style="display:none">
+            <h2>create-edit</h2>
+            <table id="createUpdateForm">
+                <tr>
+                    <td>User ID</td>
+                    <td><input type="text" name="userid" id="idInput"></td>
+                </tr>
+                <tr>
+                    <td>Name</td>
+                    <td><input type="text" name="name"></td>
+                </tr>
+                <tr>
+                    <td>Training Record</td>
+                    <td><input type="text" name="trainingrecord"></td>
+                </tr>
+                <tr>    
+                    <td>Year Completed</td>
+                    <td><input type="text" name="yearcompleted"></td>
+                </tr>
+				<tr>    
+                    <td>Year Expired</td>
+                    <td><input type="text" name="expiryyear"></td>
+                </tr>
+                <tr>
+                    <td></td><td>
+                        <button id="create-button" onclick="doCreate()">Create</button>     
+                        <button id="update-button" onclick="doUpdate()">Update</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div id="display">
+            <h2>Training Records</h2>
+            <button onClick="showCreate()">Create</button>
+            <table id="trainingTable" class="table">
+                <tr>
+                    <th>User ID</th><th>Name</th><th>Training Record</th><th>Year Completed</th><th>Year Expired</th><th></th><th></th>
+                </tr>
+            </table>
+        </div>
+
+        <script>
+            function showCreate(){
+                document.getElementById('display').style.display = "none"
+                document.getElementById('update-button').style.display = "none"
+                document.getElementById('create-button').style.display = "block"
+                document.getElementById('create-update').style.display = "block"
+
+            }
+            
+            function showUpdate(thisElem){
+                var rowElement = thisElem.parentNode.parentNode;
+                training = readRecordFromRow(rowElement)
+                populateForm(training)
+
+                document.getElementById('display').style.display = "none"
+                document.getElementById('update-button').style.display = "block"
+                document.getElementById('create-button').style.display = "none"
+                document.getElementById('create-update').style.display = "block"
+
+            }
+            function readTrainingFromRow(rowElement){
+                training = {}
+                training.userid = rowElement.getAttribute("id");
+                training.name = rowElement.cells[1].firstChild.textContent
+                training.trainingrecord = rowElement.cells[2].firstChild.textContent
+                training.yearcompleted = rowElement.cells[3].firstChild.textContent
+                training.expiryyear = rowElement.cells[4].firstChild.textContent
+                return training
+                
+            }
+            function populateForm(training){
+                var form = document.getElementById('createUpdateForm')
+
+                form.querySelector('input[name="userid"]').value = training.userid
+                form.querySelector('input[name="userid"]').disabled=true
+                
+                form.querySelector('input[name="name"]').value = training.name
+                form.querySelector('input[name="trainingrecord"]').value = training.trainingrecord
+                form.querySelector('input[name="yearcompleted"]').value = training.yearcompleted      
+                form.querySelector('input[name="expiryyear"]').value = training.expiryyear      
+            }
+            function clearForm() {
+                var form = document.getElementById('createUpdateForm')
+
+                form.querySelector('input[name="userid"]').value = ''
+                form.querySelector('input[name="userid"]').disabled=false
+                
+                form.querySelector('input[name="name"]').value = ''
+                form.querySelector('input[name="trainingrecord"]').value = ''
+                form.querySelector('input[name="yearcompleted"]').value = ''      
+                form.querySelector('input[name="expiryyear"]').value = ''      
+            }
+            
+            function doCreate(){
+                console.log("in doCreate")
+                training= getTrainingFromForm()
+                console.log(training)
+                $.ajax({
+                    url:"/training",
+                    data:JSON.stringify(training),
+                    method:"POST",
+                    dataType:"JSON",
+                    contentType: "application/json; charset=utf-8",
+                    success:function(result){
+                        console.log(result) 
+                        addTrainingToTable(training)
+                        showDisplay()
+                        clearForm()
+
+                    },
+                    error:function(xhr,status,error){
+                        console.log("error"+error)
+                    }
+                })
+               
+            }
+            function doUpdate(){
+                training = getTrainingFromForm()
+                updateServer(training)
+                
+            }
+            function updateServer(training){
+               $.ajax({
+                    url: "/training/"+training.userid,
+                    data: JSON.stringify(training),
+                    method: "PUT",
+                    dataType: "JSON",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (result) {
+                        console.log(result)
+                        updateTableRow(training)
+                        showDisplay()
+                        clearForm()
+
+                    },
+                    error: function (xhr, status, error) {
+                        console.log("error" + error)
+                    }
+                })
+            }
+            function doDelete(thisElem){
+                var tableElement = document.getElementById('trainingTable');
+                var rowElement = thisElem.parentNode.parentNode;
+                var index = rowElement.rowIndex;
+                userid = rowElement.getAttribute("id");
+                $.ajax({
+                    url:"/training/"+userid,
+                    method:"DELETE",
+                    dateType:"JSON",
+                    success:function(result){
+                        tableElement.deleteRow(index);
+                    },
+                    error:function(xhr,status,error){
+                        console.log(error)
+                    }
+                })
+                
+            }
+            function updateTableRow(training){
+                rowElement = document.getElementById(training.userid)
+                rowElement.cells[1].firstChild.textContent = training.name
+                rowElement.cells[2].firstChild.textContent = training.trainingrecord
+                rowElement.cells[3].firstChild.textContent = training.yearcompleted
+                rowElement.cells[4].firstChild.textContent = training.expiryyear
+                //console.log("updating table")
+            }
+            function getTrainingFromForm(){
+                var form = document.getElementById('createUpdateForm')
+
+                var training = {}
+                training.userid = form.querySelector('input[name="userid"]').value
+                training.name = form.querySelector('input[name="name"]').value
+                training.trainingrecord = form.querySelector('input[name="trainingrecord"]').value
+                training.yearcompleted = form.querySelector('input[name="yearcompleted"]').value
+                training.expiryyear = form.querySelector('input[name="expiryyear"]').value
+                //console.log(training)
+                 return training
+            }
+             function showDisplay() {
+                    document.getElementById('display').style.display = "block"
+                    document.getElementById('create-update').style.display = "none"
+
+                }
+
+            function populateTable(){
+                //ajax getAll
+               $.ajax({
+                   url:'http://127.0.0.1:5000/training',
+                   method:'GET',
+                   datatype:'JSON',
+                   success:function(results){
+                        for (training of results){
+                             addTrainingToTable(training)
+                        }
+                   },
+                   error:function (xhr,status,error){
+                       console.log ("error "+error +" code:"+status)
+                   }
+
+               })
+               
+            }
+            function addTrainingToTable(training){
+                //console.log("working so far")
+                tableElem = document.getElementById("trainingTable")
+                rowElem = tableElem.insertRow(-1)
+                rowElem.setAttribute("id", training.userid)
+                cell1 = rowElem.insertCell(0)
+                cell1.innerHTML = training.userid
+                cell2 = rowElem.insertCell(1)
+                cell2.innerHTML = training.name
+                cell3 = rowElem.insertCell(2)
+                cell3.innerHTML = training.trainingrecord
+                cell4 = rowElem.insertCell(3)
+                cell4.innerHTML = training.yearcompleted
+                cell5 = rowElem.insertCell(4)
+                cell5.innerHTML = training.expiryyear
+                cell6 = rowElem.insertCell(5)
+                cell6.innerHTML = '<button onclick="showUpdate(this)">Update</button>'
+                cell7 = rowElem.insertCell(6)
+                cell7.innerHTML = '<button onclick="doDelete(this)">delete</button>'
+                 }
+            populateTable()
+        </script>
+    </body>
+</html>

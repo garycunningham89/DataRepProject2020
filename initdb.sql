@@ -4,12 +4,11 @@ mysql> use datarepproject;
 Database changed
 
 mysql> create table training(
-    -> userid int NOT NULL AUTO_INCREMENT,
+    -> userid int NOT NULL PRIMARY KEY,
     -> name varchar(250) NOT NULL,
     -> trainingrecord varchar(250) NOT NULL,
     -> yearcompleted int,
     -> expiryyear int,
-    -> PRIMARY KEY (userid)
     -> );
 Query OK, 0 rows affected (0.04 sec)
 	

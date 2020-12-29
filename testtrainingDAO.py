@@ -13,7 +13,7 @@ record2 = {
     'name': 'Jane Doe',
     'trainingrecord': 'Safe Pass',
     'yearcompleted': 2022,
-    'expairyyear': 2025
+    'expiryyear': 2025
 }
 #trvalue = trainingDAO.create(record)
 returnValue = trainingDAO.findById(record2['userid'])
