@@ -1,6 +1,21 @@
 import mysql.connector
 from mysql.connector import cursor
+#import dfbconfig as cfg
+#    def connectToDB(self):
+#        self.db = mysql.connector.connect(
+#            host =      cfg.mysql['host'],
+#            user =      cfg.mysql['user'],
+#            password=   cfg.mysql['password'],
+#           database =  cfg.mysql['database']
+#        )
+#    def __init__(self):
+#        self.connectToDB()
+        #print('connection made')
 
+#    def getCursor(self):
+#       if not self.db.is_connected():
+#          self.connectToDB()
+#       return self.db.cursor() 
 class TrainingDAO:
     db = ""
     def __init__(self):
