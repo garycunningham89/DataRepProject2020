@@ -23,6 +23,7 @@ app.debug = True
 app.run()
 app.run(debug = True)
 
-Challengees:
+Challenges:
 Time constraints with course content in line with work commitments and pandemic restrictions.
 Course content well delivered but extensive in learning.
+Need to practice and use the course content in more examples for future learning.
