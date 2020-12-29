@@ -12,7 +12,7 @@ tutorialspoint.com/flask/index.htm
 
 
 pip install virtualenv
-
+pip install dbconfig
 mkdir newproj
 cd newproj
 virtualenv venv
