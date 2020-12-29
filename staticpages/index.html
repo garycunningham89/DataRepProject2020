@@ -31,33 +31,35 @@
     <div class="w3-center w3-padding-16" id="create-update" style="display:none">
         <h2 class="w3-border-bottom w3-border-light-grey w3-padding-16"><b>Add Training Record</b></h2>
         <table class= "table" id="createUpdateForm">
+            <form action="">
             <tr>
                 <td>ID</td>
-                <td><input type="number" name="userid" id="idInput" placeholder="Please Input ID" required name="idInput"></td>
+                <td><input type="number" name="userid" required id="idInput" placeholder="Please Input ID"></td>
             </tr>
             <tr>
                 <td>Full Name</td>
-                <td><input type="text" name="name"  id="idInput" placeholder="Please Input Full Name" required name="name"></td>
+                <td><input type="text" name="name" required placeholder="Please Input Full Name" > </td>
             </tr>
             <tr>
                 <td>Training Record</td>
-                <td><input type="text" name="trainingrecord" placeholder="Please Input Training Record Details" required name="trainingrecord"></td>
+                <td><input type="text" name="trainingrecord" required placeholder="Please Input Training Record Details"></td>
             </tr>
             <tr>    
                 <td>Completion Date</td>
-                <td><input type="number" name="yearcompleted" placeholder="Please Input Year" required name="Please Input Year"></td>
+                <td><input type="number" name="yearcompleted" required placeholder="Please Input Year"></td>
             </tr>
             <tr>    
                 <td>Expiration Date</td>
-                <td><input type="number" name="expiryyear" placeholder="Please Input Year" required name="expiryyear"></td>
+                <td><input type="number" name="expiryyear" required placeholder="Please Input Year"></td>
             </tr>
             <tr>
                 <td></td><td>
-                    <button class="w3-button w3-black w3-section"id="create-button" onclick="doCreate()" type="submit"> <i class="fa fa-plus"></i> Add New</button>     
-                    <button class="w3-button w3-black w3-section"id="update-button" onclick="doUpdate()" type="submit"> <i class="fa fa-pencil"></i> Update Record</button>
+                    <button class="w3-button w3-black w3-section"id="create-button" onclick="doCreate()"> <i class="fa fa-plus"></i> Save Changes</button>     
+                    <button class="w3-button w3-black w3-section"id="update-button" onclick="doUpdate()"> <i class="fa fa-pencil"></i> Update Record</button>
                     <button class="w3-button w3-red w3-section"id="cancel-changes" onclick=""><a href= "/index.html"> <i class="fa fa-ban"></i> Cancel</button>
                 </td>
             </tr>
+            </form>
         </table>
     </div>
     <div class="w3-center w3-padding-16" id="display">
