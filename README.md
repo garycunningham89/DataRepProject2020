@@ -27,3 +27,10 @@ Challenges:
 Time constraints with course content in line with work commitments and pandemic restrictions.
 Course content well delivered but extensive in learning.
 Need to practice and use the course content in more examples for future learning.
+
+Requirements in requirements.txt
+Database in initdb.sql
+Server in server.py
+Configuration outlined in dbconfigtemplate.py
+Webpages in staticpages folder
+Table Code in trainingrecordsDAO.py
