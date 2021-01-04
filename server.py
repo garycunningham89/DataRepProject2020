@@ -14,7 +14,7 @@ def index():
     if not 'username' in session:
             return redirect(url_for('login'))
     return 'Welcome ' + session['username'] +\
-            '<br><a href="'+url_for('logout)+">logout</a>
+            '<br><a href="'+url_for('logout')+">logout</a>
                                     
 @app.route('/login')
 def login():
