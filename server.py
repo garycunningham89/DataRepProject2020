@@ -31,7 +31,7 @@ def process_login():
     
     #else
     session['username']="I dunno"
-    return redirect(url_for('home'))
+    return redirect(url_for('index'))
 @app.route('/logout')                                    
 def logout():
     session.pop('username',None)
