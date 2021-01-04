@@ -35,7 +35,7 @@ def process_login():
 @app.route('/logout')                                    
 def logout():
     session.pop('username',None)
-    return redirect(url for('index'))
+    return redirect(url_for('index'))
 
 @app.route('/data')
 def getData():
