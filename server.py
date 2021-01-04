@@ -24,6 +24,7 @@ def login():
               'login' +\
          '</a>' +\
        '</button>'
+@app.route('/processlogin')                                     
 def process_login():
     #check credentials
     #if bad redirect to login page again
@@ -31,10 +32,15 @@ def process_login():
     #else
     session['username']="I dunno"
     return redirect(url_for('home'))
-                                    
+@app.route('/logout')                                    
 def logout():
     session.pop('username', None)
-    return redirect(url for('index')                                
+    return redirect(url for('index')
+@app.route('/data')
+def getData():
+    if not 'username' in session:
+       abort(401)
+    return '{"data":"all here"}'                
 #def index():
     #return "hello"
  #   count=0
