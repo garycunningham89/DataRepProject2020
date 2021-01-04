@@ -226,6 +226,7 @@
             function updateTableRow(training){
                 rowElement = document.getElementById(training.userid)
                 rowElement.cells[1].firstChild.textContent = training.name
+                
                 rowElement.cells[2].firstChild.textContent = training.trainingrecord
                 rowElement.cells[3].firstChild.textContent = training.yearcompleted
                 rowElement.cells[4].firstChild.textContent = training.expiryyear
