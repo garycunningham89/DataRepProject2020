@@ -18,7 +18,7 @@ def index():
                                     
 @app.route('/login')
 def login():
-  return '<h1> Login </h1>'+\ 
+  return '<h1> Login </h1>'+\
       '<button>'+\
          '<a href="'+url_for('process_login')+'">' +\
               'login' +\
