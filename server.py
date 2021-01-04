@@ -14,11 +14,11 @@ def index():
     if not 'username' in session:
             return redirect(url_for('login'))
     return 'Welcome ' + session['username'] +\
-            '<br><a href="'+url_for('logout')+">logout</a>
+            '<br><a href="'+url_for('logout')+'">logout</a>
                                     
 @app.route('/login')
 def login():
-  return '<h1> Login </h1>' +\ 
+  return '<h1> Login </h1> '+\ 
       '<button>'+\
          '<a href="'+url_for('process_login')+'">'+\
               'login' +\
@@ -34,7 +34,7 @@ def process_login():
     return redirect(url_for('home'))
 @app.route('/logout')                                    
 def logout():
-    session.pop('username', None)
+    session.pop('username',None)
     return redirect(url for('index')
 @app.route('/data')
 def getData():
