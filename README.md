@@ -5,15 +5,15 @@ REFERENCES:
 
 Class Content and Tutorials:
 
-* https://martin-thoma.com/configuration-files-in-python/
+* Martin Thoma (2014) Configuration files in Python. Access online at: https://martin-thoma.com/configuration-files-in-python/
 
-* https://www.jmarshall.com/easy/http/
+* James Marshall (2012) HTTP Made Really Easy A Practical Guide to Writing Clients and Servers. Access online at: https://www.jmarshall.com/easy/http/
 
-* https://flask.palletsprojects.com/en/1.1.x/
+* FLASK (2020) Tutorials. Access online at: https://flask.palletsprojects.com/en/1.1.x/
 
-* tutorialspoint.com/flask/index.htm
+* Tutorialspoint (2020) FLASK Tutorials. Access online at: tutorialspoint.com/flask/index.htm
 
-* https://www.w3schools.com/html/default.asp
+* w3schools (2020) HTML Tutorials. Access online at: https://www.w3schools.com/html/default.asp
 
 Some Installed Packages and Functions:
 
@@ -49,7 +49,7 @@ Course content well delivered but extensive in learning.
 
 Need to practice and use the course content in more examples for future learning.
 
-
+Did not get the project finished to the standard I would have liked and should have invested more time.
 
 FILES: 
 
