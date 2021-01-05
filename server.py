@@ -44,8 +44,8 @@ def getData():
     return '{"data":"all here"}'                
 def index():
     return "hello"
-       count=0
-       count+=1
+    count=0
+    count+=1
 
     if not 'counter' in session:
         session['counter'] =0
