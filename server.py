@@ -10,40 +10,8 @@ app.secret_key = 'SecretDataRep'
 
 #index
 @app.route('/')
-def home():
-    if not 'username' in session:
-            return redirect(url_for('login'))
-    return 'Welcome ' + session['username'] +\
-            '<br><a href="'+url_for('logout')+'">logout</a>'
-                                    
-@app.route('/login')
-def login():
-  return '<h1> Login </h1>'+\
-      '<button>'+\
-         '<a href="'+url_for('process_login')+'">' +\
-              'login' +\
-         '</a>' +\
-       '</button>'
-@app.route('/processlogin')                                     
-def process_login():
-    #check credentials
-    #if bad redirect to login page again
-    
-    #else
-    session['username']="User Records"
-    return redirect(url_for('home'))
-@app.route('/logout')                                    
-def logout():
-    session.pop('username',None)
-    return redirect(url_for('home'))
-
-@app.route('/data')
-def getData():
-    if not 'username' in session:
-       abort(401)
-    return '{"data":"all here"}'                
 def index():
-    return "hello"
+    return "hello, please navigate to http://127.0.0.1:5000/index1.html"
     count=0
     count+=1
 
@@ -60,7 +28,7 @@ def index():
         "<br/>this Count ="+str(count)
    
     return pageContent
-    
+
 @app.route('/clear')
 def clear():
     session.clear()
@@ -68,6 +36,40 @@ def clear():
     return "done"
     
 #curl http://127.0.0.1:5000
+
+@app.route('/home')
+def home():
+    if not 'username' in session:
+            return redirect(url_for('login'))
+    return 'Welcome ' + session['username'] +\
+            '<br><a href="'+url_for('logout')+'">logout</a>'
+                                    
+@app.route('/login')
+def login():
+  return '<h1> This Page Is Used to Validate The Login of the User </h1>'+\
+      '<button>'+\
+         '<a href="'+url_for('process_login')+'">' +\
+              'Please Press To Continue' +\
+         '</a>' +\
+       '</button>'
+@app.route('/processlogin')                                     
+def process_login():
+    #check credentials
+    #if bad redirect to login page again
+    
+    #else
+    session['username']="to Processing Training Records"
+    return redirect(url_for('home'))
+@app.route('/logout')                                    
+def logout():
+    session.pop('username',None)
+    return redirect(url_for('home'))
+
+@app.route('/data')
+def getData():
+    if not 'username' in session:
+       abort(401)
+    return '{"data":"all here"}'                
 
 
 #get all
