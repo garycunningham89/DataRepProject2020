@@ -65,7 +65,7 @@ def index():
 def clear():
     session.clear()
     session.pop('counter',None)       
-       return "done"
+    return "done"
     
 #curl http://127.0.0.1:5000
 
