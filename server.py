@@ -10,7 +10,7 @@ app.secret_key = 'SecretDataRep'
 
 #index
 @app.route('/')
-def index():
+def home():
     if not 'username' in session:
             return redirect(url_for('login'))
     return 'Welcome ' + session['username'] +\
@@ -30,42 +30,42 @@ def process_login():
     #if bad redirect to login page again
     
     #else
-    session['username']="I dunno"
-    return redirect(url_for('index'))
+    session['username']="User Records"
+    return redirect(url_for('home'))
 @app.route('/logout')                                    
 def logout():
     session.pop('username',None)
-    return redirect(url_for('index'))
+    return redirect(url_for('home'))
 
 @app.route('/data')
 def getData():
     if not 'username' in session:
        abort(401)
     return '{"data":"all here"}'                
-#def index():
-    #return "hello"
- #   count=0
-  #  count+=1
+def index():
+    return "hello"
+       count=0
+       count+=1
 
-   # if not 'counter' in session:
-    #    session['counter'] =0
-     #   print("new session")
+    if not 'counter' in session:
+        session['counter'] =0
+        print("new session")
 
-#    sessionCount=session['counter']
- #   sessionCount+=1
-  #  session['counter']=sessionCount
+    sessionCount=session['counter']
+    sessionCount+=1
+    session['counter']=sessionCount
 
-   # pageContent="<h1>counts</h1>" +\
-  #      "session Count ="+str(sessionCount) +\
- #       "<br/>this Count ="+str(count)
+    pageContent="<h1>counts</h1>" +\
+        "session Count ="+str(sessionCount) +\
+        "<br/>this Count ="+str(count)
    
- #   return pageContent
+    return pageContent
     
-#@app.route('/clear')
-#def clear():
-    #session.clear()
- #   session.pop('counter',None)       
-       #return "done"
+@app.route('/clear')
+def clear():
+    session.clear()
+    session.pop('counter',None)       
+       return "done"
     
 #curl http://127.0.0.1:5000
 
