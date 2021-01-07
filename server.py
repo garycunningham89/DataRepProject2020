@@ -11,7 +11,7 @@ app.secret_key = 'SecretDataRep'
 #index
 @app.route('/')
 def index():
-    return "hello, please navigate to http://127.0.0.1:5000/index1.html"
+    return app.send_static_file('index.html')
     count=0
     count+=1
 
